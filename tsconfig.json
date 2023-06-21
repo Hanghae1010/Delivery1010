@@ -10,6 +10,10 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "paths": {
+      "@mock-db/*": ["./src/mock-db/*"]
+    },
+    "resolveJsonModule": true,
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,

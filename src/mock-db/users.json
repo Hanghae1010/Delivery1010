@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "jeonghyun",
+    "email": "test@email.com",
+    "password": "test.password",
+    "role": 0,
+    "address": "asdf123",
+    "createdAt": "Tue Jun 20 2023 23:59:14 GMT+0900",
+    "updatedAt": "Tue Jun 20 2023 23:59:14 GMT+0900"
+  }
+]
