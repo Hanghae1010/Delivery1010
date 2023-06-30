@@ -5,5 +5,5 @@ export class CoreEntity {
   @Type(() => Date)
   createdAt: Date;
   @Type(() => Date)
-  updatedAt: Date;
+  updatedAt?: Date;
 }

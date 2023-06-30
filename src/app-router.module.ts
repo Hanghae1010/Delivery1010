@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
 import { AuthModule } from './main/auth/auth.module';
 import { UsersModule } from './main/users/users.module';
 import { AlertsModule } from './main/alerts/alerts.module';
+import { CommonModule } from './main/common/common.module';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
     AlertsModule,
     AuthModule,
     UsersModule,
+  
   ],
   providers: [],
 })
