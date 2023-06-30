@@ -2,8 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Store } from './entities/store.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { SetStoreInfo } from './dto/set-store-info.dto';
-import { UpdateStoreInfo } from './dto/update-store-info.dto';
+import { SetStoreInfo } from './dtos/set-store-info.dto';
+import { UpdateStoreInfo } from './dtos/update-store-info.dto';
 
 @Injectable()
 export class StoresService {

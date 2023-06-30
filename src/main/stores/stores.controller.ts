@@ -8,8 +8,8 @@ import {
   Post,
 } from '@nestjs/common';
 import { StoresService } from './stores.service';
-import { SetStoreInfo } from './dto/set-store-info.dto';
-import { UpdateStoreInfo } from './dto/update-store-info.dto';
+import { SetStoreInfo } from './dtos/set-store-info.dto';
+import { UpdateStoreInfo } from './dtos/update-store-info.dto';
 
 @Controller('stores')
 export class StoresController {
