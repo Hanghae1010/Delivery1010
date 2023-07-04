@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { OrdersService } from './orders.service';
 import { CreateOrderInput } from './dto/create-order.dto';
@@ -20,7 +20,8 @@ export class OrdersController {
   }
 
   @Get('cart/:id')
-  async getCart(@Param('userid') userid: Number) {
+  async getCart(@Param('userid') userid: number) {
+    const test = userid;
     const cart = new CartMenuListDto();
     cart.cardId = 1;
     const menu = new MenuListDto();
@@ -35,12 +36,24 @@ export class OrdersController {
     return cart;
   }
 
+  @Get('cart/:id')
+  async getCartMenu(@Param('userid') userid: number) {
+    return this._orderService.getCartList(userid);
+  }
+
   @Post('cart/:id')
   async addCartMenu(
     @Param('userid') userid: number,
     @Body() body: MenuListDto,
   ) {
-    return '';
-    e;
+    return this._orderService.addCartMenu(userid, body);
+  }
+
+  @Delete('cart/:id')
+  async removeCartMenu(
+    @Param('userid') userid: number,
+    @Body() body: MenuListDto,
+  ) {
+    return this._orderService.removeCartMenu(userid, body);
   }
 }

@@ -1,9 +1,14 @@
-import { Type } from 'class-transformer';
+import {
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 export class CoreEntity {
+  @PrimaryGeneratedColumn()
   id: number;
-  @Type(() => Date)
+  @CreateDateColumn()
   createdAt: Date;
-  @Type(() => Date)
-  updatedAt?: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

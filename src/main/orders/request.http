@@ -1,0 +1,48 @@
+### Create new user
+POST http://localhost:3000/users/signup
+Content-Type: application/json
+
+{
+  "name": "jeong2",
+  "email": "test2@email.com",
+  "password": "testpw2",
+  "role": "Client",
+  "address": "1234",
+  "status": "Active"
+}
+
+### signin user
+POST http://localhost:3000/users/signin
+Content-Type: application/json
+
+{
+  "email": "test@email.com",
+  "password": "testpw"
+}
+
+### signout
+POST http://localhost:3000/users/signout
+
+
+### Find user with id
+GET http://localhost:3000/users/1
+
+
+### Find all users with email
+GET http://localhost:3000/users?email=asdf@email.com
+
+
+### Delete a user with id
+DELETE http://localhost:3000/users/1
+
+
+### Update a user
+PATCH http://localhost:3000/users/1
+Content-Type: application/json
+
+{
+  "address": "fhdsuafdas"
+}
+
+### Get current user
+GET http://localhost:3000/users/currentuser
