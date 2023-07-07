@@ -1,17 +1,43 @@
-import { CoreEntity } from '../../common/entities/core.entity';
+import { IsEmail, IsEnum, IsString } from 'class-validator';
+import { CoreEntity } from 'src/main/common/entities/core.entity';
+import { Payment } from 'src/main/payment/entities/payment.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 export enum UserRole {
   Client = 'Client', // 0
   StoreManager = 'StoreManager', // 1
 }
+export enum UserStatus {
+  Active = 'Active',
+  Blocked = 'Blocked',
+  Deleted = 'Deleted',
+}
+@Entity()
 export class User extends CoreEntity {
+  @Column()
+  @IsString()
   name: string;
+
+  @Column({ unique: true })
+  @IsEmail()
   email: string;
+
+  @Column()
+  @IsString()
   password: string;
-  role: number;
-  address?: string;
-  cartId?: number;
-  // favorites?: Store[];
-  // reviews?: Review[];
-  storeId?: number;
+
+  @Column({ type: 'enum', enum: UserRole })
+  @IsEnum(UserRole)
+  role: UserRole;
+
+  @Column()
+  @IsString()
+  address: string;
+
+  @Column({ type: 'enum', enum: UserStatus })
+  @IsEnum(UserStatus)
+  status: UserStatus;
+
+  @OneToMany((type) => Payment, (payment) => payment.user)
+  payments: Payment[];
 }

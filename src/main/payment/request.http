@@ -1,0 +1,18 @@
+### 결제 요청 및 생성
+POST http://localhost:3000/payment
+Content-Type: application/json
+
+{
+  "transactionId": "카카오페이123",
+  "paymentPrice": 10000,
+  "storeId": 1,
+}
+
+### 결제 상태 업데이트
+PATCH http://localhost:3000/payment/1
+Content-Type: application/json
+
+{
+  "paymentStatus": "Paid",
+  "isThirdParty": true
+}
