@@ -11,6 +11,7 @@ import { AlertsModule } from './main/alerts/alerts.module';
 import { UsersModule } from './main/users/users.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cookieSession = require('cookie-session');
 @Module({
