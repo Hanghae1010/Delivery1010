@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { CreateAccountInput } from './dto/create-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags("user")
+@ApiTags('user')
 @Controller()
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
