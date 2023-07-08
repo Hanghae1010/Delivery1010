@@ -41,6 +41,5 @@ export class OrdersController {
     @Body() body: MenuListDto,
   ) {
     return '';
-    e;
   }
 }
