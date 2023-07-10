@@ -6,9 +6,9 @@ on:
 
 env:
   AWS_REGION: ap-northeast-2
-  ECR_REGISTRY: 493042038681.dkr.ecr.ap-northeast-2.amazonaws.com/repository-delivery1010
+  ECR_REGISTRY: 493042038681.dkr.ecr.ap-northeast-2.amazonaws.com/repository-delivery1010 
   ECR_REPOSITORY: repository-delivery1010
-
+ 
 jobs:
   deploy:
     name: Deploy
