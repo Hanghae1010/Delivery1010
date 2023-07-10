@@ -36,7 +36,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         #IMAGE_TAG: ${{ secrets.IMAGE_VERSION }}
-        IMAGE_TAG: 799d02e96cab5b1143e09c6fd3025a30ca2d5c6a
+        IMAGE_TAG: ${{ github.sha }}
       run: |
         # Build a docker container and
         # push it to ECR so that it can
