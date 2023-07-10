@@ -24,9 +24,9 @@ export class Payment extends CoreEntity {
   @IsEnum(PaymentStatus)
   paymentStatus: PaymentStatus;
 
-  @ManyToOne((type) => User, (user) => user.payments)
-  user: User;
-  @RelationId((payment: Payment) => payment.user)
+  //@ManyToOne((type) => User, (user) => user.payments)
+  //user: User;
+  //@RelationId((payment: Payment) => payment.user)
   userId: User;
 
   @ManyToOne((type) => Store)

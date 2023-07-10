@@ -23,7 +23,8 @@ export class PaymentController {
   @Post()
   @UseGuards(AuthGuard)
   createPayment(@Body() body: CreatePaymentInput, @CurrentUser() user: User) {
-    return this.paymentService.create(body, user);
+    //return this.paymentService.create(body, user);
+    return {};
   }
 
   @Patch('/:id')
@@ -34,6 +35,7 @@ export class PaymentController {
     if (!body.isThirdParty) {
       throw new ForbiddenException('3rd 파티 결제 요청이 아닙니다');
     }
-    return this.paymentService.updatePayment(id, body.paymentStatus);
+    // return this.paymentService.updatePayment(id, body.paymentStatus);
+    return {};
   }
 }

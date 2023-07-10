@@ -9,6 +9,7 @@ export class CoreEntity {
   id: number;
   @CreateDateColumn()
   createdAt: Date;
+
   @UpdateDateColumn()
   updatedAt: Date;
 }

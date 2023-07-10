@@ -4,7 +4,6 @@ import { OrdersModule } from 'src/main/orders/orders.module';
 import { UsersModule } from './main/users/users.module';
 import { AlertsModule } from './main/alerts/alerts.module';
 import { PaymentModule } from './main/payment/payment.module';
-import { StoresModule } from './main/stores/stores.module';
 
 const routes: Routes = [
   { path: 'orders', module: OrdersModule },
@@ -19,8 +18,6 @@ const routes: Routes = [
     OrdersModule,
     AlertsModule,
     UsersModule,
-    PaymentModule,
-    StoresModule,
   ],
   providers: [],
 })

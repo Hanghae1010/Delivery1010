@@ -1,8 +1,9 @@
 import { IsNumber, IsString } from 'class-validator';
+import { Menu } from 'src/main/menus/entities/menu.entity';
 import { User } from 'src/main/users/entities/user.entity';
-import { Column } from 'typeorm';
+import { Column, OneToMany } from 'typeorm';
 
-export class Store extends User {
+export class Store {
   @Column({ unique: true })
   @IsNumber()
   userId: number;
@@ -14,5 +15,7 @@ export class Store extends User {
   @Column()
   @IsString()
   content?: string;
-  // status
+
+  @OneToMany((type) => Menu, (menu) => menu.store)
+  menus!: Menu[];
 }
