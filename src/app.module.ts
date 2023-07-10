@@ -26,11 +26,12 @@ const cookieSession = require('cookie-session');
       ignoreEnvFile: process.env.NODE_ENV === 'prod',
       validationSchema: Joi.object({
         NODE_ENV: Joi.string().valid('dev', 'prod', 'test').required(),
-        DB_PORT: Joi.string().required(),
-        DB_HOST: Joi.string().required(),
-        DB_USERNAME: Joi.string().required(),
-        DB_PASSWORD: Joi.string().required(),
-        DB_DATABASE: Joi.string().required(),
+        DB_PORT: 3306,
+        DB_HOST:
+          'delivery1010-mysql-2.csghjebsa21j.ap-northeast-2.rds.amazonaws.com',
+        DB_USERNAME: 'admin',
+        DB_PASSWORD: 'delivery1010!#',
+        DB_DATABASE: 'delivery1010',
       }),
     }),
     TypeOrmModule.forRoot({
