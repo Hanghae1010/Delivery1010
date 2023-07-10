@@ -2,16 +2,16 @@ version: '3'
 services:
   app:
     build:
-    dockerfile: ./Dockerfile
-    context: .
+      dockerfile: ./Dockerfile
+      context: .
     ports:
-      - '3000:3000'
+      - 3000:3000
     environment:
       - DB_PORT=3306
-      - DB_HOST=delivery1010-mysql-2.csghjebsa21j.ap-northeast-2.rds.amazonaws.com
-      - DB_USERNAME=admin
-      - DB_PASSWORD=delivery1010!#
-      - DB_DATABASE=delivery1010
+      - DB_HOST='delivery1010-mysql-2.csghjebsa21j.ap-northeast-2.rds.amazonaws.com'
+      - DB_USERNAME='admin'
+      - DB_PASSWORD='delivery1010!#'
+      - DB_DATABASE='delivery1010'
 #사용법
 #docker build -t 이미지명:버전 .
 #docker-compose up
