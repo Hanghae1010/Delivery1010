@@ -17,24 +17,25 @@ export class StoresController {
 
   @Get('/:id')
   findOne(@Param('id') storeId: number) {
-    return this.storesService.findOne(storeId);
+    //return this.storesService.findOne(storeId);
+    return {};
   }
   @Post('/:id')
   async addInfo(@Param('id') storeId: number, @Body() data: SetStoreInfo) {
-    const storeData = await this.storesService.addInfo(storeId, data);
-    return storeData;
+    //const storeData = await this.storesService.addInfo(storeId, data);
+    return {};
   }
   @Patch('/:id')
   async updateInfo(
     @Param('id') storeId: number,
     @Body() data: UpdateStoreInfo,
   ) {
-    const storeData = await this.storesService.updateInfo(storeId, data);
-    return storeData;
+    //const storeData = await this.storesService.updateInfo(storeId, data);
+    return {};
   }
   @Delete('/:id')
   async removeInfo(@Param('id') storeId: number) {
-    const store = await this.storesService.removeInfo(storeId);
-    return store;
+    //const store = await this.storesService.removeInfo(storeId);
+    return {};
   }
 }

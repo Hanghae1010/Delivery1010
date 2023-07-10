@@ -7,7 +7,7 @@ import { UpdateStoreInfo } from './dtos/update-store-info.dto';
 
 @Injectable()
 export class StoresService {
-  constructor(@InjectRepository(Store) private repo: Repository<Store>) {}
+  /* constructor(@InjectRepository(Store) private repo: Repository<Store>) {}
   findOne(storeId: number) {
     const store = this.repo.findOneBy({ id: storeId });
     if (!store) throw new NotFoundException('store not found');
@@ -26,5 +26,5 @@ export class StoresService {
   async removeInfo(storeId: number) {
     const store = await this.findOne(storeId);
     return this.repo.remove(store);
-  }
+  }*/
 }

@@ -8,7 +8,7 @@ import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class PaymentService {
-  constructor(
+  /* constructor(
     @InjectRepository(Payment)
     private readonly paymentRepo: Repository<Payment>,
     @InjectRepository(Store)
@@ -44,5 +44,5 @@ export class PaymentService {
     }
     payment.paymentStatus = paymentStatus;
     return this.paymentRepo.save(payment);
-  }
+  }*/
 }

@@ -38,6 +38,6 @@ export class User extends CoreEntity {
   @IsEnum(UserStatus)
   status: UserStatus;
 
-  @OneToMany((type) => Payment, (payment) => payment.user)
-  payments: Payment[];
+  // @OneToMany((type) => Payment, (payment) => payment.user)
+  // payments: Payment[];
 }

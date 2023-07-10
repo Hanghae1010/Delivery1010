@@ -3,7 +3,7 @@ import { Menu } from 'src/main/menus/entities/menu.entity';
 import { User } from 'src/main/users/entities/user.entity';
 import { Column, OneToMany } from 'typeorm';
 
-export class Store extends User {
+export class Store {
   @Column({ unique: true })
   @IsNumber()
   userId: number;

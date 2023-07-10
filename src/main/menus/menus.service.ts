@@ -8,12 +8,13 @@ export class MenusService {
   constructor(@InjectRepository(Menu) private repo: Repository<Menu>) {}
 
   create(name: string, price: number, storeId: number) {
-    const menu = this.repo.create({
+    /*const menu = this.repo.create({
       name,
       price,
       store: { id: storeId },
     });
-    return this.repo.save(menu);
+    */
+    return {};
   }
   getAll(): [] {
     return [];

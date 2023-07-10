@@ -11,6 +11,7 @@ import { AlertsModule } from './main/alerts/alerts.module';
 import { UsersModule } from './main/users/users.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { Menu } from './main/menus/entities/menu.entity';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cookieSession = require('cookie-session');
 @Module({
@@ -34,11 +35,11 @@ const cookieSession = require('cookie-session');
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DB_HOST,
-      port: +process.env.DB_PORT,
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
+      host: 'delivery1010-mysql-2.csghjebsa21j.ap-northeast-2.rds.amazonaws.com',
+      port: 3306,
+      username: 'admin',
+      password: 'delivery1010!#',
+      database: 'delivery1010',
       synchronize: process.env.NODE_ENV !== 'prod',
       entities: [User],
       logging:
