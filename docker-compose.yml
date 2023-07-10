@@ -12,3 +12,8 @@ services:
       - DB_USERNAME=admin
       - DB_PASSWORD=delivery1010!#
       - DB_DATABASE=delivery1010
+#사용법
+#docker build -t 이미지명:버전 .
+#docker-compose up
+#종료
+#docker-compose down
