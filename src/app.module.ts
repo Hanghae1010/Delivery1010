@@ -12,7 +12,8 @@ import { UsersModule } from './main/users/users.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Menu } from './main/menus/entities/menu.entity';
-//import { LoggerMiddleware } from './utils/logger.middleware';
+import LoggerMiddleware from './utils/logger.middleware';
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cookieSession = require('cookie-session');
 @Module({
@@ -63,7 +64,7 @@ export class AppModule {
   constructor(private dataSource: DataSource) {}
   configure(consumer: MiddlewareConsumer) {
     // on every incoming request
-    //consumer.apply(LoggerMiddleware).forRoutes('*');
+    consumer.apply(LoggerMiddleware).forRoutes('*');
     consumer
       .apply(
         cookieSession({
