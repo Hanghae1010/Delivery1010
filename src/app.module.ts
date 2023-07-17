@@ -36,11 +36,11 @@ const cookieSession = require('cookie-session');
     // }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'delivery1010-mysql-2.csghjebsa21j.ap-northeast-2.rds.amazonaws.com',
+      host: 'delivery1010.mysql.database.azure.com',
       port: 3306,
-      username: 'admin',
+      username: 'admin_',
       password: 'delivery1010!#',
-      database: 'delivery1010',
+      database: 'delivery1010!#',
       synchronize: process.env.NODE_ENV !== 'prod',
       entities: [User],
       logging:
