@@ -1,5 +1,5 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:904995603149:task-definition/delivery1010-task-family:1",
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:904995603149:task-definition/delivery1010-task-family-2:1",
   "containerDefinitions": [
     {
       "name": "delivery1010-container",
@@ -23,14 +23,15 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/delivery1010-task-family",
+          "awslogs-create-group": "true",
+          "awslogs-group": "/ecs/delivery1010-task-family-2",
           "awslogs-region": "ap-northeast-2",
           "awslogs-stream-prefix": "ecs"
         }
       }
     }
   ],
-  "family": "delivery1010-task-family",
+  "family": "delivery1010-task-family-2",
   "taskRoleArn": "arn:aws:iam::904995603149:role/ecs-cicd",
   "executionRoleArn": "arn:aws:iam::904995603149:role/ecs-cicd",
   "networkMode": "awsvpc",
@@ -61,18 +62,21 @@
     },
     {
       "name": "ecs.capability.task-eni"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
     }
   ],
   "placementConstraints": [],
   "compatibilities": ["EC2", "FARGATE"],
   "requiresCompatibilities": ["FARGATE"],
-  "cpu": "256",
+  "cpu": "512",
   "memory": "1024",
   "runtimePlatform": {
     "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2023-07-17T10:50:13.930Z",
+  "registeredAt": "2023-07-17T12:22:18.090Z",
   "registeredBy": "arn:aws:iam::904995603149:user/admin",
   "tags": []
 }
