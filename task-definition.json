@@ -23,7 +23,7 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/role-delivery1010",
+          "awslogs-group": "/ecs/delivery1010-task-family",
           "awslogs-region": "ap-northeast-2",
           "awslogs-stream-prefix": "ecs"
         }
@@ -39,7 +39,16 @@
   "status": "ACTIVE",
   "requiresAttributes": [
     {
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
       "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
     },
     {
       "name": "com.amazonaws.ecs.capability.task-iam-role"
@@ -57,8 +66,8 @@
   "placementConstraints": [],
   "compatibilities": ["EC2", "FARGATE"],
   "requiresCompatibilities": ["FARGATE"],
-  "cpu": "1024",
-  "memory": "3072",
+  "cpu": "256",
+  "memory": "1024",
   "runtimePlatform": {
     "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
