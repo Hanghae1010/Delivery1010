@@ -1,50 +1,37 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:493042038681:task-definition/role-delivery1010:16",
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:904995603149:task-definition/delivery1010-task-family:1",
   "containerDefinitions": [
     {
-      "name": "container-delivery1010",
-      "image": "493042038681.dkr.ecr.ap-northeast-2.amazonaws.com/repository-delivery1010:5241d122541f20e71922bf260a00faf485d8dfdb",
+      "name": "delivery1010-container",
+      "image": "904995603149.dkr.ecr.ap-northeast-2.amazonaws.com/delivery1010:latest",
       "cpu": 0,
       "portMappings": [
         {
+          "name": "delivery1010-container-3000-tcp",
           "containerPort": 3000,
           "hostPort": 3000,
-          "protocol": "tcp"
+          "protocol": "tcp",
+          "appProtocol": "http"
         }
       ],
       "essential": true,
       "environment": [],
+      "environmentFiles": [],
       "mountPoints": [],
       "volumesFrom": [],
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-group": "/ecs/role-delivery1010",
-          "awslogs-region": "ap-northeast-2",
-          "awslogs-stream-prefix": "ecs"
-        }
-      }
+      "ulimits": []
     }
   ],
-  "family": "role-delivery1010",
-  "taskRoleArn": "arn:aws:iam::493042038681:role/role-nestjs",
-  "executionRoleArn": "arn:aws:iam::493042038681:role/role-nestjs",
+  "family": "delivery1010-task-family",
+  "taskRoleArn": "arn:aws:iam::904995603149:role/ecs-cicd",
+  "executionRoleArn": "arn:aws:iam::904995603149:role/ecs-cicd",
   "networkMode": "awsvpc",
-  "revision": 16,
+  "revision": 1,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
     {
-      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-    },
-    {
-      "name": "ecs.capability.execution-role-awslogs"
-    },
-    {
       "name": "com.amazonaws.ecs.capability.ecr-auth"
-    },
-    {
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
     },
     {
       "name": "com.amazonaws.ecs.capability.task-iam-role"
@@ -62,12 +49,13 @@
   "placementConstraints": [],
   "compatibilities": ["EC2", "FARGATE"],
   "requiresCompatibilities": ["FARGATE"],
-  "cpu": "256",
-  "memory": "1024",
+  "cpu": "1024",
+  "memory": "3072",
   "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2023-07-11T07:50:18.659Z",
-  "registeredBy": "arn:aws:iam::493042038681:user/iam_admin",
+  "registeredAt": "2023-07-17T10:50:13.930Z",
+  "registeredBy": "arn:aws:iam::904995603149:user/admin",
   "tags": []
 }
