@@ -4,8 +4,11 @@ import {
   utilities as nestWinstonModuleUtilities,
 } from 'nest-winston';
 import WinstonCloudwatch from 'winston-cloudwatch';
+import { CloudWatchLogsClient } from '@aws-sdk/client-cloudwatch-logs';
 
 const { createLogger, format, transports } = winston;
+
+const { combine, timestamp, colorize, printf, simple } = winston.format;
 
 const logFormat = winston.format.printf((info) => {
   return `${info.timestamp} [${info.level}] : ${info.message}`;
@@ -13,6 +16,7 @@ const logFormat = winston.format.printf((info) => {
 
 export default class LoggerMiddleware {
   private logger: winston.Logger;
+  private cloudWatchClient: CloudWatchLogsClient;
 
   constructor() {
     this.logger = createLogger({
@@ -41,16 +45,22 @@ export default class LoggerMiddleware {
           )}}`,
       };
       const cloudWatchHelper = new WinstonCloudwatch(cloudwatchConfig);
-      const transports = new winston.transports.Console({
-        format: winston.format.combine(
-          winston.format.colorize(),
-          winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-          winston.format.printf(
-            (info) => `${info.timestamp} ${info.level}: ${info.message}`,
-          ),
-        ),
+      this.cloudWatchClient = new CloudWatchLogsClient({
+        credentials: {
+          accessKeyId: cloudwatchConfig.awsAccessKeyId,
+          secretAccessKey: cloudwatchConfig.awsSecretKey,
+        },
+        region: cloudwatchConfig.awsRegion,
       });
-      this.logger.add(transports);
+
+      this.logger.add(
+        new transports.Console({
+          format: winston.format.combine(
+            winston.format.colorize(),
+            winston.format.simple(),
+          ),
+        }),
+      );
     } else if (process.env.NODE_ENV === 'debug') {
       // 프로덕션이 아닌 경우 콘솔에 출력
       this.logger.add(
