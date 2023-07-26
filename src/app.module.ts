@@ -63,7 +63,7 @@ export class AppModule {
   constructor(private dataSource: DataSource) {}
   configure(consumer: MiddlewareConsumer) {
     // on every incoming request
-    //consumer.apply(LoggerMiddleware).forRoutes('*');
+    consumer.apply(LoggerMiddleware).forRoutes('*');
     consumer
       .apply(
         cookieSession({

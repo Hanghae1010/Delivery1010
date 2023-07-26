@@ -4,26 +4,23 @@ import {
   utilities as nestWinstonModuleUtilities,
 } from 'nest-winston';
 import WinstonCloudwatch from 'winston-cloudwatch';
-import { CloudWatchLogsClient } from '@aws-sdk/client-cloudwatch-logs';
 
 const { createLogger, format, transports } = winston;
-
 const { combine, timestamp, colorize, printf, simple } = winston.format;
 
-const logFormat = winston.format.printf((info) => {
+const logFormat = printf((info) => {
   return `${info.timestamp} [${info.level}] : ${info.message}`;
 });
 
 export default class LoggerMiddleware {
   private logger: winston.Logger;
-  private cloudWatchClient: CloudWatchLogsClient;
 
   constructor() {
     this.logger = createLogger({
       level: 'info',
       transports: [new winston.transports.Console()],
-      format: winston.format.combine(
-        winston.format.timestamp({
+      format: combine(
+        timestamp({
           format: 'YYYY-MM-DD HH:mm:ss',
         }),
         logFormat,
@@ -45,30 +42,21 @@ export default class LoggerMiddleware {
           )}}`,
       };
       const cloudWatchHelper = new WinstonCloudwatch(cloudwatchConfig);
-      this.cloudWatchClient = new CloudWatchLogsClient({
-        credentials: {
-          accessKeyId: cloudwatchConfig.awsAccessKeyId,
-          secretAccessKey: cloudwatchConfig.awsSecretKey,
-        },
-        region: cloudwatchConfig.awsRegion,
-      });
-
-      this.logger.add(
-        new transports.Console({
-          format: winston.format.combine(
-            winston.format.colorize(),
-            winston.format.simple(),
+      const transports = new winston.transports.Console({
+        format: winston.format.combine(
+          winston.format.colorize(),
+          winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+          winston.format.printf(
+            (info) => `${info.timestamp} ${info.level}: ${info.message}`,
           ),
-        }),
-      );
+        ),
+      });
+      this.logger.add(transports);
     } else if (process.env.NODE_ENV === 'debug') {
       // 프로덕션이 아닌 경우 콘솔에 출력
       this.logger.add(
         new transports.Console({
-          format: winston.format.combine(
-            winston.format.colorize(),
-            winston.format.simple(),
-          ),
+          format: combine(colorize(), simple()),
         }),
       );
     }
@@ -86,9 +74,9 @@ export default class LoggerMiddleware {
       transports: [
         new winston.transports.Console({
           level: process.env.NODE_ENV === 'production' ? 'info' : 'silly',
-          format: winston.format.combine(
-            winston.format.colorize(),
-            winston.format.timestamp(),
+          format: combine(
+            colorize(),
+            timestamp(),
             nestWinstonModuleUtilities.format.nestLike('SampleApp', {
               prettyPrint: true,
             }),
