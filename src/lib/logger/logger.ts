@@ -21,7 +21,7 @@ export default class Logger {
   constructor(private readonly env: EnvService) {
     this.logGroupName = process.env.CLOUDWATCH_GROUP_NAME;
     this.logStreamName = process.env.CLOUDWATCH_LOG_STREAM_NAME;
-    const awsAccessKeyId = process.env.CLOUDWATCH_SECRET_ACCESS_KEY;
+    const awsAccessKeyId = process.env.CLOUDWATCH_ACCESS_KEY;
     const awsSecretKey = process.env.CLOUDWATCH_SECRET_ACCESS_KEY;
     const awsRegion = process.env.CLOUDWATCH_REGION;
 
