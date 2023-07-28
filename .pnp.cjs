@@ -40,6 +40,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@nestjs/typeorm", "virtual:27f9f62c34b95e6399f4c5462ab16811dcb888053520f4584210534661ccc03ef96005eaef21569ac0e6ddc6fccc262d71a30400396b17247b4c25006cbd3c75#npm:10.0.0"],\
             ["@types/cookie-session", "npm:2.0.44"],\
             ["@types/express", "npm:4.17.17"],\
+            ["@types/express-session", "npm:1.17.7"],\
             ["@types/jest", "npm:29.5.1"],\
             ["@types/node", "npm:18.16.12"],\
             ["@types/supertest", "npm:2.0.12"],\
@@ -3202,6 +3203,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/express-session", [\
+        ["npm:1.17.7", {\
+          "packageLocation": "./.yarn/cache/@types-express-session-npm-1.17.7-4e543506f5-4764eafaf4.zip/node_modules/@types/express-session/",\
+          "packageDependencies": [\
+            ["@types/express-session", "npm:1.17.7"],\
+            ["@types/express", "npm:4.17.17"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/graceful-fs", [\
         ["npm:4.1.6", {\
           "packageLocation": "./.yarn/cache/@types-graceful-fs-npm-4.1.6-1eadcf742d-c3070ccdc9.zip/node_modules/@types/graceful-fs/",\
@@ -5576,6 +5587,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@nestjs/typeorm", "virtual:27f9f62c34b95e6399f4c5462ab16811dcb888053520f4584210534661ccc03ef96005eaef21569ac0e6ddc6fccc262d71a30400396b17247b4c25006cbd3c75#npm:10.0.0"],\
             ["@types/cookie-session", "npm:2.0.44"],\
             ["@types/express", "npm:4.17.17"],\
+            ["@types/express-session", "npm:1.17.7"],\
             ["@types/jest", "npm:29.5.1"],\
             ["@types/node", "npm:18.16.12"],\
             ["@types/supertest", "npm:2.0.12"],\

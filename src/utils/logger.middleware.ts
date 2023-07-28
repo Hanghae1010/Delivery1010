@@ -1,88 +1,51 @@
-import winston from 'winston';
-import {
-  WinstonModule,
-  utilities as nestWinstonModuleUtilities,
-} from 'nest-winston';
-import WinstonCloudwatch from 'winston-cloudwatch';
+/* eslint-disable @typescript-eslint/naming-convention */
+import { ConfigService } from '@nestjs/config';
+import { NextFunction, Request, Response } from 'express';
 
-const { createLogger, format, transports } = winston;
-const { combine, timestamp, colorize, printf, simple } = winston.format;
+import { EnvService } from '../config/env/env.service';
+import Logger from '../lib/logger/logger';
 
-const logFormat = printf((info) => {
-  return `${info.timestamp} [${info.level}] : ${info.message}`;
-});
+const config = new ConfigService();
+const env = new EnvService(config);
+const loggerInstance = new Logger(env);
 
-export default class LoggerMiddleware {
-  private logger: winston.Logger;
+export default function logger(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  const { method, originalUrl, body } = req;
+  const session = req.sessionID;
 
-  constructor() {
-    this.logger = createLogger({
-      level: 'info',
-      transports: [new winston.transports.Console()],
-      format: combine(
-        timestamp({
-          format: 'YYYY-MM-DD HH:mm:ss',
-        }),
-        logFormat,
+  const start = Date.now();
+
+  loggerInstance.info({
+    Session: session,
+    Request: `${method} ${originalUrl}`,
+    Headers: Object.entries(req.headers).map(
+      ([key, value]) => `${key}: ${value}`,
+    ),
+    Body: JSON.stringify(body),
+  });
+
+  const oldSend = res.send.bind(res);
+  // eslint-disable-next-line
+  res.send = <T>(data: T): Response<T> => {
+    const responseData = oldSend.call(res, data);
+
+    loggerInstance.info({
+      Session: session,
+      Response: `${method} ${originalUrl} ${res.statusCode} ${
+        Date.now() - start
+      }ms`,
+      Headers: Object.entries(req.headers).map(
+        ([key, value]) => `${key}: ${value}`,
       ),
+      Body: JSON.stringify(data),
     });
 
-    // 프로덕션인 경우
-    if (process.env.NODE_ENV === 'production') {
-      // timestamp 는 클라우드워치에 도달할 때 찍히므로 별도 설정 필요 x
-      const cloudwatchConfig = {
-        logGroupName: process.env.CLOUDWATCH_GROUP_NAME,
-        logStreamName: `${process.env.CLOUDWATCH_GROUP_NAME}-${process.env.NODE_ENV}`,
-        awsAccessKeyId: process.env.CLOUDWATCH_ACCESS_KEY,
-        awsSecretKey: process.env.CLOUDWATCH_SECRET_ACCESS_KEY,
-        awsRegion: process.env.CLOUDWATCH_REGION,
-        messageFormatter: ({ level, message, additionalInfo }) =>
-          `[${level}] : ${message} \nAdditional Info: ${JSON.stringify(
-            additionalInfo,
-          )}}`,
-      };
-      const cloudWatchHelper = new WinstonCloudwatch(cloudwatchConfig);
-      const transports = new winston.transports.Console({
-        format: winston.format.combine(
-          winston.format.colorize(),
-          winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-          winston.format.printf(
-            (info) => `${info.timestamp} ${info.level}: ${info.message}`,
-          ),
-        ),
-      });
-      this.logger.add(transports);
-    } else if (process.env.NODE_ENV === 'debug') {
-      // 프로덕션이 아닌 경우 콘솔에 출력
-      this.logger.add(
-        new transports.Console({
-          format: combine(colorize(), simple()),
-        }),
-      );
-    }
-  }
+    return responseData;
+  };
 
-  public info(msg: string) {
-    this.logger.info(msg);
-  }
-  public error(errMsg: string) {
-    this.logger.error(errMsg);
-  }
-
-  public getRequestLogger() {
-    return WinstonModule.forRoot({
-      transports: [
-        new winston.transports.Console({
-          level: process.env.NODE_ENV === 'production' ? 'info' : 'silly',
-          format: combine(
-            colorize(),
-            timestamp(),
-            nestWinstonModuleUtilities.format.nestLike('SampleApp', {
-              prettyPrint: true,
-            }),
-          ),
-        }),
-      ],
-    });
-  }
+  next();
 }
